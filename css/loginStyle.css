@@ -1,0 +1,80 @@
+#wrapper {
+    font-family: "Roboto", sans-serif;
+    /* Default background color is white */
+    background-color: white;
+    /* Adjust to parent size(in this case body) */
+    margin: 0px;
+}
+
+#bg_image {
+    /*- No repeat texture -*/
+    background-repeat: no-repeat;
+    /*- Ever cover -*/
+    background-attachment: fixed;
+    /*- Cover entire element -*/
+    background-size: cover;
+    /*- Center Position -*/
+    background-position: center;
+    /* Margin top */
+    top: 0px;
+    /* Stay at back */
+    z-index: -1;
+    /* Size */
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    /* Opacity Control */
+    opacity: 0.6;
+    /* Filter  */
+    filter: grayscale(100%);
+}
+
+#login-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#mainLog {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    margin: auto;
+    padding: 32px;
+    background-color: chocolate;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+#logImage {
+    
+    width: 100%;
+}
+
+input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#logButton {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background-color: brown;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+}
