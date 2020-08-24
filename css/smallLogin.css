@@ -1,0 +1,38 @@
+.buttonUser {
+    box-shadow: inset 0px 34px 0px -15px #b54b3a;
+    background-color: #a73f2d;
+    border: 1px solid #241d13;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 8px 16px;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #7a2a1d;
+}
+
+    .buttonUser:hover {
+        background-color: #b34332;
+    }
+
+    .buttonUser:active {
+        position: relative;
+        top: 1px;
+    }
+
+#panelUser {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    width: 160px;
+    height: 64px;
+    background-color: white;
+    box-shadow: 0px 0px 8px black;
+    border-radius: 0px 0px 0px 4px;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+}

@@ -2,22 +2,6 @@
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
 <html lang="en">
 <head>
-    <script>
-        function redirectFunc() {
-            // Find my location 
-            var myLocation = window.location.href;
-            var splited = myLocation.split('/');
-            var newDir = myLocation.replace(splited[splited.length - 1], "login.html");
-
-            if (sessionStorage.getItem("loginStatus") == "logged") {
-
-            }
-            else {
-                window.location = "login.html"; // .replace(newDir);
-            }
-        }
-        setTimeout("redirectFunc()", 0);
-    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -28,7 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
-
+    <link href="css/smallLogin.css" rel="stylesheet">
 </head>
 <body>
     <nav class="site-header sticky-top py-1 bg-dark">
@@ -38,8 +22,14 @@
             <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
             <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
             <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+
+            <button id="userName" class="buttonUser" onclick="showUser()">User</button>
+        </div>
+        <div id="panelUser">
+            <button class="buttonUser" onclick="disconnectUser()">Desconectar</button>
         </div>
     </nav>
+   
     <main role="main">
         <section class="jumbotron text-center">
             <div class="m-5">
@@ -122,5 +112,6 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
+    <script src="js/smallLogin.js"></script>
 </body>
 </html>

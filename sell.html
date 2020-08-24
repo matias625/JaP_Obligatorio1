@@ -30,6 +30,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/dropzone.css" rel="stylesheet">
+    <link href="css/smallLogin.css" rel="stylesheet">
 </head>
 <body>
     <nav class="site-header sticky-top py-1 bg-dark">
@@ -39,6 +40,10 @@
             <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
             <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
             <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+            <button id="userName" class="buttonUser" onclick="showUser()">User</button>
+        </div>
+        <div id="panelUser">
+            <button class="buttonUser" onclick="disconnectUser()">Desconectar</button>
         </div>
     </nav>
     <div class="container">
@@ -219,5 +224,6 @@
     <script src="js/dropzone.js"></script>
     <script src="js/init.js"></script>
     <script src="js/sell.js"></script>
+    <script src="js/smallLogin.js"></script>
 </body>
 </html>

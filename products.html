@@ -12,6 +12,7 @@
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <link href="css/smallLogin.css" rel="stylesheet">
 </head>
 <body>
     <nav class="site-header sticky-top py-1 bg-dark">
@@ -21,6 +22,11 @@
             <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
             <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
             <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+            <!-- Abrir User Info -->
+            <button id="userName" class="buttonUser" onclick="showUser()">User</button>
+        </div>
+        <div id="panelUser">
+            <button class="buttonUser" onclick="disconnectUser()">Desconectar</button>
         </div>
     </nav>
 
@@ -34,7 +40,6 @@
         </div>
     </div>
     -->
-
     <!-- Ejercicio 1 -->
     <main role="main" class="pb-5">
         <!-- Title -->
@@ -48,24 +53,32 @@
             <div class="row">
                 <div class="col text-right">
                     <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+                        <!-- Price Up -->
                         <label class="btn btn-light active" id="sortAsc">
-                            <input type="radio" name="options" autocomplete="off" checked>A-Z
+                            <input type="radio" name="options" autocomplete="off" checked><i class="fas fa-sort-amount-down mr-1"></i>$
                         </label>
+                        <!-- Price Low -->
                         <label class="btn btn-light" id="sortDesc">
-                            <input type="radio" name="options" autocomplete="off">Z-A
+                            <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-up mr-1"></i>$
                         </label>
+                        <!-- Relevancia -->
                         <label class="btn btn-light" id="sortByCount">
-                            <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Cant.
+                            <input type="radio" name="options" autocomplete="off"><i class="fas fa-sort-amount-down mr-1"></i>Rel.
                         </label>
                     </div>
                 </div>
             </div>
             <div class="row justify-content-end">
-                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <!-- Barra de busqueda -->
+                    <input id="searcher" type="search" class="form-control" placeholder="Buscar..."
+                           onchange="searchProduct(searcher)" oncancel="searchProduct(searcher)" />
+
+                </div>
                 <div class="col-md-6 col-sm-12 mb-1 container">
                     <div class="row container p-0 m-0">
                         <div class="col">
-                            <p class="font-weight-normal text-right my-2">Cant.</p>
+                            <p class="font-weight-normal text-right my-2">Precio:</p>
                         </div>
                         <div class="col">
                             <input class="form-control" type="number" placeholder="min." id="rangeFilterCountMin">
@@ -108,5 +121,6 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/products.js"></script>
+    <script src="js/smallLogin.js"></script>
 </body>
 </html>

@@ -26,8 +26,14 @@ function login(user, pass) {
     }
 
     sessionStorage.setItem("loginStatus", "logged");
+    sessionStorage.setItem("userName", user.trim());
 
-    window.location = "index.html"; // Go_Home();
+    if (sessionStorage.getItem("redirect") != null) {
+        window.location = sessionStorage.getItem("redirect"); // Go_Home();
+    }
+    else {
+        window.location = "index.html"; // Go_Home();
+    }    
 }
 
 
