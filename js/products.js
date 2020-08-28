@@ -43,7 +43,7 @@ function showProductsList() {
 
         let finded = true;
         if (searched != undefined) {
-            finded = product.name.includes(searched);
+            finded = product.name.toLowerCase().includes(searched.toLowerCase());
         }
 
         if (finded) {
@@ -74,21 +74,21 @@ function showProductsList() {
     document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
 }
 
-function sortAndShowProducts(sortCriteria, categoriesArray) {
+function sortAndShowProducts(sortCriteria, productsArray) {
     currentSortCriteria = sortCriteria;
 
-    if (categoriesArray != undefined) {
-        currentProductsArray = categoriesArray;
+    if (productsArray != undefined) {
+        currentProductsArray = productsArray;
     }
 
     currentProductsArray = sortProducts(currentSortCriteria, currentProductsArray);
 
-    //Muestro las categorías ordenadas
+    // Muestro los productos ordenados
     showProductsList();
 }
 
 function searchProduct(searcher) {
-    searched = searcher.value;
+    searched = searcher;
 
     showProductsList();
 }

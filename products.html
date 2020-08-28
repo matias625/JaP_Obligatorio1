@@ -72,7 +72,7 @@
                 <div class="col-md-6">
                     <!-- Barra de busqueda -->
                     <input id="searcher" type="search" class="form-control" placeholder="Buscar..."
-                           onchange="searchProduct(searcher)" oncancel="searchProduct(searcher)" />
+                           onkeyup="searchProduct(searcher.value)" />
 
                 </div>
                 <div class="col-md-6 col-sm-12 mb-1 container">
