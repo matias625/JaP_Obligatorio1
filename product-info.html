@@ -27,27 +27,27 @@
             width: 156px;
             height: 40px;
         }
-
+            /* Hide Radio Button */
             .rating:not(:checked) > input {
                 display: none;
             }
-            /* Base Label */
+            /* Empty Star */
             .rating:not(:checked) > label {
                 width: 1em;
                 overflow: hidden;
                 white-space: nowrap;
                 cursor: pointer;
                 font-size: 30px;
-                color: #ccc;
+                color: #6e6e6e; /*#ccc;*/
             }
-
+            /* - Selected Stars - */
                 .rating:not(:checked) > label:hover,
                 .rating:not(:checked) > label:hover ~ label {
-                    color: #deb217;
+                    color: #ffff64;
                 }
-
+            /* - Filled Star - */
             .rating input:checked ~ label {
-                color: #ffc700;
+                color: #ffff19;
             }
 
         /* - - Comments : Stars - - */
@@ -155,7 +155,7 @@
                 <dd>
                     <div style="padding: 16px 32px 16px 32px;">
 
-                        <div class="row text-center text-lg-left pt-2" style="display:flex; background-color: aqua; padding: 8px;">
+                        <div class="row text-center text-lg-left pt-2" style="display: flex; background-color: #c9c9c9; padding: 8px; border-radius: 8px;">
                             <div style="display: flex; width:100%; justify-content: space-between; align-items:center;">
                                 <label id="userComment" style="width: 192px; text-align: center; font-weight: bold;">User</label>
 
