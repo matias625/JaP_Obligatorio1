@@ -19,15 +19,30 @@
 <body>
     <nav class="site-header sticky-top py-1 bg-dark">
         <div class="container d-flex flex-column flex-md-row justify-content-between">
-            <a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-            <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-            <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-            <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-            <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-            <button id="userName" class="buttonUser" onclick="showUser()">User</button>
-        </div>
-        <div id="panelUser">
-            <button class="buttonUser" onclick="disconnectUser()">Desconectar</button>
+            <a class="py-2" href="index.html">Inicio</a>
+            <a class="py-2" href="categories.html">Categorías</a>
+            <a class="py-2" href="products.html">Productos</a>
+            <a class="py-2" href="sell.html">Vender</a>
+            <!--<a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
+    <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
+    <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
+    <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>-->
+            <div class="dropdown" style="min-width:16%;">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                        style="display:flex; justify-content: space-between; align-items:center; width: 100%;">
+                    <img src="img/tree1.jpg" height="26" />
+                    <span id="userName" style="padding:0 8px 0 8px;">User</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item " href="cart.html">Mi Carrito</a>
+                    <a class="dropdown-item" href="my-profile.html">Perfil</a>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item" onclick="disconnectUser();"
+                            style="background-color: #eb4034; color: white;">
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
         </div>
     </nav>
     <main role="main">

@@ -1,28 +1,145 @@
 var product = {};
 var comments = [];
 var currentStars = 0;
-var imageViewer = document.getElementById("myModal");
+var myCart = [];
+
+// Cart Element
+// - Name
+// - Amount
+// - Cost
+// - Currency
+
+// Añadir producto al Carrito
+function addToCart() {
+
+    let htmlCartAmount = document.getElementById("cartAmount").value;
+
+    if (htmlCartAmount != undefined) {
+        let index = myCart.findIndex(x => { return x.name == product.name; });
+
+        if (index >= 0) {
+            myCart[index].amount = htmlCartAmount;
+        }
+        else {
+            // Generate Cart Element
+            var newElement = {};
+            newElement.name = product.name;
+            newElement.cost = product.cost;
+            newElement.currency = product.currency;
+            newElement.amount = htmlCartAmount;
+
+            myCart.push(newElement);
+        }
+
+        sessionStorage.setItem("myCart", JSON.stringify(myCart));
+
+        alert("Objeto enviado al carrito");
+    }
+}
+
+//Función que se ejecuta una vez que se haya lanzado el evento de
+//que el documento se encuentra cargado, es decir, se encuentran todos los
+//elementos HTML presentes.
+document.addEventListener("DOMContentLoaded", function (e) {
+    // Get Product Json
+    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {
+            // Product Loaded
+            product = resultObj.data;
+
+            // HTML elements
+            let productNameHTML = document.getElementById("productName");
+            let productPriceHTML = document.getElementById("productPrice");
+            let productDescriptionHTML = document.getElementById("productDescription");
+            let productCountHTML = document.getElementById("productCount");
+            let productCategoryHTML = document.getElementById("productCategory");
+            // Configure Elements
+            productNameHTML.innerHTML = product.name;
+            productPriceHTML.innerHTML = product.currency + " " + product.cost;
+            productDescriptionHTML.innerHTML = product.description;
+            productCountHTML.innerHTML = product.soldCount;
+            productCategoryHTML.innerHTML = product.category;
+
+            // Configure Images/Carousel
+            showImagesGallery(product.images);
+
+            // My Cart
+            myCart = JSON.parse(sessionStorage.getItem("myCart"));
+            if (myCart == undefined) {
+                myCart = [];
+                document.getElementById("cartAmount").value = 1;
+            }
+            else {
+                let index = myCart.findIndex(x => { return x.name == product.name; });
+                if (index >= 0) {
+                    document.getElementById("cartAmount").value = myCart[index].amount;
+                }
+            }
+
+            // Related Products
+            if (product.relatedProducts.length > 0) {
+                // Get List Product Json
+                getJSONData(PRODUCTS_URL).then(function (resultObject) {
+                    if (resultObject.status === "ok") {
+                        // List Products Loaded
+                        let listProducts = resultObject.data;
+                        // Save Product related temporaly
+                        let productRelateds = product.relatedProducts;
+                        // Add Product index 2 to list for test Change Color by Price
+                        productRelateds.push(2);
+
+                        let htmlContentToAppend = ``;
+                        // For each related product
+                        for (let a = 0; a < productRelateds.length; a++) {
+                            // Find product in List Product
+                            let myProduct = listProducts[productRelateds[a]];
+                            // Write Product Card
+                            htmlContentToAppend += `
+                                <div class="col-md-3">
+                                    <a href="products.html" class="card mb-4 shadow-sm custom-card"` + (myProduct.cost > product.cost ? ` style="background-color: crimson;"` : ` style="background-color: aqua;"`) + `>
+                                        <img class="bd-placeholder-img card-img-top" src="`+ myProduct.imgSrc + `">
+                                        <h3 class="m-3" style="color:white;">` + myProduct.name + `</h3>
+                                        <div class="card-body">
+                                            <p class="card-text" style="color:white;">` + myProduct.currency + ` ` + myProduct.cost + `</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                `;
+                        }
+                        // Configure Element
+                        document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;
+                    }
+                });
+            }
+        }
+    });
+
+    // New Comment
+    document.getElementById("userComment").innerText = "Usuario: " + sessionStorage.getItem("userName");
+
+    // Get Comments Json
+    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
+        if (resultObj.status === "ok") {    
+            // Comments Loaded
+            comments = resultObj.data;
+            // Sort comments
+            comments.sort((x, y) => CommentSort(x, y));
+            // Show Comments on page
+            showComments();
+        }
+    });
+});
 
 // Actualiza la galeria de imagenes
 function showImagesGallery(array) {
-
-    let htmlContentToAppend = ``;
     let htmlCarouselIndicator = ``;
     let htmlCarouselImages = ``;
 
     for (let i = 0; i < array.length; i++) {
         let imageSrc = array[i];
 
-        htmlContentToAppend += `
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail selectableImage" src="` + imageSrc + `" alt="" onclick="showCarousel();">
-                </div>
-            </div>
-            `;
-
         htmlCarouselIndicator += `
-                <li data-target="#demo" data-slide-to="` + i + (i == 0 ? `" class="active` : ``) +`"></li>
+                <li data-target="#demo" data-slide-to="` + i + (i == 0 ? `" class="active` : ``) + `"></li>
             `;
 
         htmlCarouselImages += `
@@ -31,27 +148,28 @@ function showImagesGallery(array) {
             </div>
             `;
     }
-    document.getElementById("productImagesGallery").innerHTML = htmlContentToAppend;
     document.getElementById("productIndicatorCarousel").innerHTML = htmlCarouselIndicator;
     document.getElementById("productImageCarousel").innerHTML = htmlCarouselImages;
 }
 
-function showCarousel() {
-    if (imageViewer == undefined) {
-        imageViewer = document.getElementById("myModal");
+function CommentSort(x, y) {
+    if (x.dateTime > y.dateTime) {
+        return 1;
     }
-
-    imageViewer.style.display = "block";
+    else if (x.dateTime < y.dateTime) {
+        return -1;
+    }
+    else {
+        return 0;
+    }
 }
-function hideCarousel() {
-    imageViewer.style.display = "none";
-}
 
-// Actualiza la lista de comentarios
+// Show Comments on page
 function showComments() {
     let htmlContentToAppend = ``;
 
     for (let i = 0; i < comments.length; i++) {
+        // juan_pedro -> Juan Pedro
         let name = comments[i].user.split("_");
         let finalName = "";
         for (let a = 0; a < name.length; a++) {
@@ -82,127 +200,41 @@ function showComments() {
 
     document.getElementById("listComments").innerHTML = htmlContentToAppend;
 }
-// Añade nuevo comentario.
+
+// Add New Comment
 function checkStars(stars) {
     currentStars = stars;
 }
 function addComment(text) {
+    // Check if areaText is NOT empty
     if (text.trim() != "") {
+        // Get Current DateTime
         var today = new Date();
         var date = today.getFullYear() + '-' + AddZero(today.getMonth() + 1) + '-' + AddZero(today.getDate());
         var time = AddZero(today.getHours()) + ":" + AddZero(today.getMinutes()) + ":" + AddZero(today.getSeconds());
-
+        // Generate New comment
         let newComment = {};
         newComment.score = currentStars;
         newComment.description = text;
         newComment.user = sessionStorage.getItem("userName").toLowerCase();
         newComment.dateTime = date + ' ' + time;
-
+        // Add comment to list
         comments.push(newComment);
-
+        // Show Comments on page
         showComments();
     }
     else {
         alert("Comentario vacio.");
     }
 }
-
+// Utility
 function AddZero(number) {
     if (number < 10) {
         return "0" + number;
     }
     return number;
 }
-
-
-// Añadir producto al Carrito
-function addToCart() {
-    alert("Open Cart");
-}
-
-// Utilidad : hace que la primera letra sea mayuscula.
+// Utility : first letter Uppercase
 function firstUppercase(text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCT_INFO_URL).then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            product = resultObj.data;
-
-            // Product Info
-            let productNameHTML = document.getElementById("productName");
-            let productPriceHTML = document.getElementById("productPrice");
-            let productDescriptionHTML = document.getElementById("productDescription");
-            let productCountHTML = document.getElementById("productCount");
-            let productCategoryHTML = document.getElementById("productCategory");
-
-            productNameHTML.innerHTML = product.name;
-            productPriceHTML.innerHTML = product.currency + " " + product.cost;
-            productDescriptionHTML.innerHTML = product.description;
-            productCountHTML.innerHTML = product.soldCount;
-            productCategoryHTML.innerHTML = product.category;
-
-            // Muestro las imagenes en forma de galería
-            showImagesGallery(product.images);
-
-            // Productos relacionados
-            if (product.relatedProducts.length > 0) {
-                
-                getJSONData(PRODUCTS_URL).then(function (resultObj) {
-                    if (resultObj.status === "ok") {
-                        var relatedProducts = resultObj.data;
-                        var productRelateds = product.relatedProducts;
-                        productRelateds.push(2);
-                        let htmlContentToAppend = ``;
-
-                        for (a = 0; a < product.relatedProducts.length; a++) {
-                            var myProduct = relatedProducts[productRelateds[a]];
-                            htmlContentToAppend += `
-                                <div class="col-md-3">
-                                    <a href="products.html" class="card mb-4 shadow-sm custom-card"` + (myProduct.cost > product.cost ? ` style="background-color: crimson;"` : ` style="background-color: aqua;"`) + `>
-                                        <img class="bd-placeholder-img card-img-top" src="`+ myProduct.imgSrc + `">
-                                        <h3 class="m-3" style="color:white;">` + myProduct.name + `</h3>
-                                        <div class="card-body">
-                                            <p class="card-text" style="color:white;">`+ myProduct.currency + ` ` + myProduct.cost + `</p>
-                                        </div>
-                                    </a>
-                                </div>
-                                `;
-                        }
-
-                        document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;
-                    }
-                });               
-            }
-        }
-    });
-
-    // Nuevo Comentario
-
-    // Carga los Comentarios desde el archivo Json
-    getJSONData(PRODUCT_INFO_COMMENTS_URL).then(function (resultObj) {
-        if (resultObj.status === "ok") {    
-            comments = resultObj.data;
-
-            comments.sort((x, y) => CommentSort(x, y));
-
-            showComments();
-        }
-    });
-});
-
-function CommentSort(x, y) {
-    if (x.dateTime > y.dateTime) {
-        return 1;
-    }
-    else if (x.dateTime < y.dateTime) {
-        return -1;
-    }
-    else {
-        return 0;
-    }
 }
