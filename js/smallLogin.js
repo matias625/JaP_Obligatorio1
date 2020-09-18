@@ -12,6 +12,15 @@ function redirectFunc() {
         }
 
         document.getElementById("userName").innerText = userName;
+
+        // My Cart
+        let myCart = JSON.parse(sessionStorage.getItem("myCart"));
+        if (myCart == undefined) {
+            document.getElementById("cartTotal").innerText = "0";
+        }
+        else {
+            document.getElementById("cartTotal").innerText = myCart.length;
+        }
     }
     else { 
         sessionStorage.setItem("redirect", window.location);

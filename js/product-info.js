@@ -32,6 +32,7 @@ function addToCart() {
         }
 
         sessionStorage.setItem("myCart", JSON.stringify(myCart));
+        document.getElementById("cartTotal").innerText = myCart.length;
 
         alert("Objeto enviado al carrito");
     }
@@ -75,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     document.getElementById("cartAmount").value = myCart[index].amount;
                 }
             }
+            document.getElementById("cartTotal").innerText = myCart.length;
 
             // Related Products
             if (product.relatedProducts.length > 0) {

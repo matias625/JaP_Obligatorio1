@@ -75,6 +75,7 @@ function removeProduct(index) {
     // alert("Delete : " + index);
     myCart.splice(index, 1);
     sessionStorage.setItem("myCart", JSON.stringify(myCart));
+    document.getElementById("cartTotal").innerText = myCart.length;
 
     showProducts();
 }
