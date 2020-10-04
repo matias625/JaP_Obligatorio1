@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             let productCountHTML = document.getElementById("productCount");
             let productCriteriaHTML = document.getElementById("productCriteria");
         
-            categoryNameHTML.innerHTML = category.name;
+            categoryNameHTML.innerHTML = "Categoría : " + category.name;
             categoryDescriptionHTML.innerHTML = category.description;
             productCountHTML.innerHTML = category.productCount;
             productCriteriaHTML.innerHTML = category.productCriteria;

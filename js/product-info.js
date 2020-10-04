@@ -18,16 +18,17 @@ function addToCart() {
         let index = myCart.findIndex(x => { return x.name == product.name; });
 
         if (index >= 0) {
-            myCart[index].amount = htmlCartAmount;
+            myCart[index].count = htmlCartAmount;
         }
         else {
             // Generate Cart Element
             var newElement = {};
             newElement.name = product.name;
-            newElement.cost = product.cost;
+            newElement.count = htmlCartAmount;
+            newElement.unitCost = product.cost;
             newElement.currency = product.currency;
-            newElement.amount = htmlCartAmount;
-
+            newElement.src = product.images[0];
+        
             myCart.push(newElement);
         }
 
@@ -73,10 +74,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
             else {
                 let index = myCart.findIndex(x => { return x.name == product.name; });
                 if (index >= 0) {
-                    document.getElementById("cartAmount").value = myCart[index].amount;
+                    document.getElementById("cartAmount").value = myCart[index].count;
                 }
             }
-            document.getElementById("cartTotal").innerText = myCart.length;
+            // document.getElementById("cartTotal").innerText = myCart.length;
 
             // Related Products
             if (product.relatedProducts.length > 0) {
@@ -97,8 +98,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                             let myProduct = listProducts[productRelateds[a]];
                             // Write Product Card
                             htmlContentToAppend += `
-                                <div class="col-md-3">
-                                    <a href="products.html" class="card mb-4 shadow-sm custom-card"` + (myProduct.cost > product.cost ? ` style="background-color: crimson;"` : ` style="background-color: aqua;"`) + `>
+                                <div class="col-md-3 ">
+                                    <a href="products.html" class="card mb-4 shadow-sm custom-card` + (myProduct.cost > product.cost ? ` bg-danger` : ` bg-primary`) + `">
                                         <img class="bd-placeholder-img card-img-top" src="`+ myProduct.imgSrc + `">
                                         <h3 class="m-3" style="color:white;">` + myProduct.name + `</h3>
                                         <div class="card-body">
@@ -107,6 +108,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
                                     </a>
                                 </div>
                                 `;
+
+                            // Used for change color OLD  + (myProduct.cost > product.cost ? ` style="background-color: crimson;"` : ` style="background-color: aqua;"`) + `>
                         }
                         // Configure Element
                         document.getElementById("relatedProducts").innerHTML = htmlContentToAppend;

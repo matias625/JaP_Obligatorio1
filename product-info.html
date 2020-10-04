@@ -8,6 +8,14 @@
     <meta name="description" content="">
     <title>eMercado - Todo lo que busques está aquí</title>
 
+    <script>
+        // Check if user logged, redirect if not
+        if (sessionStorage.getItem("loginStatus") != "logged") {
+            sessionStorage.setItem("redirect", window.location);
+            window.location = "login.html";
+        }
+    </script>
+
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
@@ -74,16 +82,58 @@
 </head>
 
 <body>
-    <nav class="site-header sticky-top py-1 bg-dark">
+    <nav class="site-header sticky-top navbar navbar-expand-md navbar-dark bg-dark">
+        <!-- Current Location Name -->
+        <span class="navbar-brand w-25">Producto</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto w-100 justify-content-between">
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <!-- Category -->
+                <li class="nav-item">
+                    <a class="nav-link" href="categories.html">Categorías</a>
+                </li>
+                <!-- Products -->
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">Productos</a>
+                </li>
+                <!-- Sell -->
+                <li class="nav-item">
+                    <a class="nav-link" href="sell.html">Vender</a>
+                </li>
+                <!-- User (dropdown) -->
+                <li class="nav-item dropdown w-25">
+                    <!-- Button for show/hide Dropdown -->
+                    <a class="nav-link dropdown-toggle " href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="img/tree1.jpg" height="26" />
+                        <span id="userName" style="padding:0 8px 0 8px;">User</span>
+                    </a>
+                    <!-- Dropdown Box -->
+                    <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item text-light" href="cart.html">Mi Carrito <span id="cartTotal" class="badge badge-success">0</span></a>
+                        <a class="dropdown-item text-light" href="my-profile.html">Perfil</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item bg-danger text-light" onclick="disconnectUser();">
+                            Cerrar Sesión
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!--<nav class="site-header sticky-top py-1 bg-dark">
         <div class="container d-flex flex-column flex-md-row justify-content-between">
             <a class="py-2" href="index.html">Inicio</a>
             <a class="py-2" href="categories.html">Categorías</a>
             <a class="py-2" href="products.html">Productos</a>
             <a class="py-2" href="sell.html">Vender</a>
-            <!--<a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-            <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-            <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-            <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>-->
             <div class="dropdown" style="min-width:16%;">
                 <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                         style="display:flex; justify-content: space-between; align-items:center; width: 100%;">
@@ -101,7 +151,7 @@
                 </div>
             </div>
         </div>
-    </nav>
+    </nav>-->
 
     <!--
     <div class="container p-5">
@@ -118,7 +168,7 @@
         <div class="container mt-5">
             <div class="text-center p-4">
                 <!--<h2>Descripción del producto</h2>
-        <p class="lead">Encontrarás aquí toda la información del producto seleccionado.</p>-->
+                <p class="lead">Encontrarás aquí toda la información del producto seleccionado.</p>-->
                 <p class="small alert-warning py-3">
                     <strong>Nota: </strong>por simplicidad, cualquiera sea el producto
                     seleccionado previamente, siempre se visualizará la presente: <strong>Chevrolet Onix Joy</strong>.
@@ -238,13 +288,15 @@
         </div>
     </footer>
     <div id="spinner-wrapper">
-        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        <div class="lds-ring">
+            <div></div><div></div><div></div><div></div>
+        </div>
     </div>
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
-    <script src="js/product-info.js"></script>
     <script src="js/smallLogin.js"></script>
+    <script src="js/product-info.js"></script>
 </body>
 
 </html>

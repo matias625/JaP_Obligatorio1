@@ -13,7 +13,7 @@
   background-color: #53C0FB;
   background: url('../img/cover_back.png');
   background-size: cover;
-  background-position: center;
+  background-position: left; /*center;*/
   background-repeat: no-repeat;
   color: black;
   font-weight: bold;
@@ -138,4 +138,15 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+
+
+/* -- Change NavBar Colors -- */
+.navbar-nav .nav-item .nav-link {
+    color: grey;
+}
+
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: white;
 }

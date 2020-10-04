@@ -1,3 +1,31 @@
+document.addEventListener("DOMContentLoaded", function (e) {
+    // User Name
+    let userName = sessionStorage.getItem("userName");
+    if (userName.length > 18) {
+        userName = userName.slice(0, 18) + "...";
+    }
+    document.getElementById("userName").innerText = userName;
+    // My Cart
+    var tmpCart = JSON.parse(sessionStorage.getItem("myCart"));
+    if (tmpCart == undefined) {
+        // Load Json
+        getJSONData("https://japdevdep.github.io/ecommerce-api/cart/654.json").then(function (resultObj) {
+            if (resultObj.status === "ok") {
+                // Cart Data
+                tmpCart = resultObj.data.articles;
+                // Save Cart to Session
+                sessionStorage.setItem("myCart", JSON.stringify(tmpCart));
+                // Change Cart Element on Dropdown
+                document.getElementById("cartTotal").innerText = tmpCart.length;
+            }
+        });
+    }
+    else {
+        // Change Cart Element on Dropdown
+        document.getElementById("cartTotal").innerText = tmpCart.length;
+    }
+});
+
 // Login
 function redirectFunc() {
     // Find my location 
@@ -13,12 +41,21 @@ function redirectFunc() {
 
         document.getElementById("userName").innerText = userName;
 
-        // My Cart
+        // My Cart        
         let myCart = JSON.parse(sessionStorage.getItem("myCart"));
         if (myCart == undefined) {
-            document.getElementById("cartTotal").innerText = "0";
+            // Load Json
+            getJSONData("https://japdevdep.github.io/ecommerce-api/cart/654.json").then(function (resultObj) {
+                if (resultObj === "ok") {
+                    // Cart Data
+                    myCart = resultObj.data;
+                    // Change Cart Element on Dropdown
+                    document.getElementById("cartTotal").innerText = myCart.length;
+                }
+            });
         }
         else {
+            // Change Cart Element on Dropdown
             document.getElementById("cartTotal").innerText = myCart.length;
         }
     }
@@ -27,8 +64,6 @@ function redirectFunc() {
         window.location = "login.html"; // .replace(newDir);
     }
 }
-
-setTimeout("redirectFunc()", 0);
 
 // Ask user to Log Out
 function disconnectUser() {
