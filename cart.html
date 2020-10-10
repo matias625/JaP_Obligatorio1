@@ -89,15 +89,23 @@
             </div>
 
             <!-- Table -->
-            <table class="table table-dark table-striped" id="cartTable" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
-                <tr align="center">
-                    <th colspan="2">Producto</th>
-                    <th>Precio(UYU)</th>
-                    <th>Precio(USD)</th>
-                    <th>Cantidad</th>
-                    <th>Subtotal</th>
-                    <th></th>
-                </tr>
+            <table class="table table-dark table-striped" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                <thead>
+                    <tr align="center">
+                        <th colspan="2">Producto</th>
+                        <th>Precio(UYU)</th>
+                        <th>Precio(USD)</th>
+                        <th>Cantidad</th>
+                        <th id="st_currency">Subtotal</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="cartTable_body">
+
+                </tbody>
+                <tfoot id="cartTable_foot">
+
+                </tfoot>
             </table>
             <!-- Costs -->
             <hr class="mb-4">

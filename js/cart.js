@@ -27,19 +27,10 @@ function showProducts() {
     // Currency Selected
     let currencySelected = document.getElementById("currencySelect").value;
     // Table header
-    let htmlContentToAppend = `
-            <tr align="center">
-                <th colspan="2">Producto</th>
-                <th>Precio (UYU)</th>
-                <th>Precio (USD)</th>
-                <th>Cantidad</th>
-                <th>Subtotal (` + (currencySelected == 0 ? `USD` : `UYU`) + `)</th>
-                <th></th>
-            </tr>
-        `; // baseTableHTML;
+    let html_tableBody = ``;
 
     // If have more items in myCart than 10, use myCart length, else use 10 slots
-    for (let i = 0; i < (myCart.length > 6 ? myCart.length : 6); i++) {
+    for (let i = 0; i < (myCart.length > 5 ? myCart.length : 5); i++) {
         if (i < myCart.length) {
             // Product
             let prod = myCart[i];
@@ -47,7 +38,7 @@ function showProducts() {
             // Calculate Subtotal
             let subTotal = calculateSubtotal(prod.unitCost, prod.count, prod.currency);
             
-            htmlContentToAppend += `
+            html_tableBody += `
             <tr align="center">
                 <th><img src="` + prod.src + `" width=60></th>
                 <th>` + prod.name + `</th>
@@ -60,7 +51,7 @@ function showProducts() {
             `;
         }
         else {
-            htmlContentToAppend += `
+            html_tableBody += `
             <tr>
                 <th></th>
                 <th></th>
@@ -74,7 +65,7 @@ function showProducts() {
         }
     }
 
-    htmlContentToAppend += `
+    let html_tableFoot = `
             <tr align="center">
                 <th colspan="3"></th>
                 <th>Subtotal (` + (currencySelected == 0 ? `USD` : `UYU`) + `)</th>
@@ -84,7 +75,9 @@ function showProducts() {
             </tr>
         `;
     // Set Table HTML
-    document.getElementById("cartTable").innerHTML = htmlContentToAppend;
+    document.getElementById("st_currency").innerHTML = `Subtotal(` + (currencySelected == 0 ? `USD` : `UYU`) + `)`;
+    document.getElementById("cartTable_body").innerHTML = html_tableBody;
+    document.getElementById("cartTable_foot").innerHTML = html_tableFoot;
     document.getElementById("currencySelect").value = currencySelected;
 
     calculateTotals();
