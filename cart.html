@@ -84,117 +84,150 @@
                     <p>showProducts() : Generar la Tabla</p>
                     <p>modifyProducts(index of product, new product count) : Modificar Tabla por cambiar cantidad de un producto.</p>
                     <p>removeProduct(index of product) : Modificar Tabla por quitar un producto de la lista.</p>
-                    <p>calculateTotals() : Modificar Costos segun el tipo de envio seleccionado.</p>
+                    <p>updateTableCosts() : Modificar Costos segun el tipo de envio seleccionado.</p>
                 </div>
             </div>
 
             <!-- Table -->
-            <table class="table table-dark table-striped" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
-                <thead>
-                    <tr align="center">
-                        <th colspan="2">Producto</th>
-                        <th>Precio(UYU)</th>
-                        <th>Precio(USD)</th>
-                        <th>Cantidad</th>
-                        <th id="st_currency">Subtotal</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="cartTable_body">
-
-                </tbody>
-                <tfoot id="cartTable_foot">
-
-                </tfoot>
-            </table>
-            <!-- Costs -->
-            <hr class="mb-4">
-            <h4 class="mb-3">Costos</h4>
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Subtotal</h6>
-                        <small class="text-muted">Costo del producto por cantidad</small>
+            <div class="row row-content">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+                            <thead>
+                                <tr align="center">
+                                    <th colspan="2">Producto</th>
+                                    <th>Precio(UYU)</th>
+                                    <th>Precio(USD)</th>
+                                    <th>Cantidad</th>
+                                    <th id="st_currency">Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartTable_body">
+                            </tbody>
+                            <tfoot id="cartTable_foot">
+                                <tr align="center">
+                                    <th colspan="3"></th>
+                                    <th>Subtotal</th>
+                                    <th id="totalAmount">-</th>
+                                    <th id="totalMoney" class="text-muted">-</th>
+                                    <th></th>
+                                </tr>
+                                <tr align="center">
+                                    <th colspan="3"></th>
+                                    <th align="right">Costo de envío</th>
+                                    <th></th>
+                                    <th id="comissionText" class="text-muted" align="right">-</th>
+                                    <th></th>
+                                </tr>
+                                <tr align="center">
+                                    <th colspan="3"></th>
+                                    <th align="right">Total</th>
+                                    <th>
+                                        <select id="currencySelect" onchange="showProducts()"
+                                                class="form-control" style="width:90px; height:30px; font-size: small;">
+                                            <option value="0">USD</option>
+                                            <option value="1">UYU</option>
+                                        </select>
+                                    </th>
+                                    <th align="right"><strong id="totalCostText" >-</strong></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
-                    <span class="text-muted" id="productCostText">-</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between lh-condensed">
-                    <div>
-                        <h6 class="my-0">Costo de envío</h6>
-                        <small class="text-muted">Según el tipo de envío</small>
-                    </div>
-                    <span class="text-muted" id="comissionText">-</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <div class="row">
-                        <span class="col">Total</span>
-                        <select id="currencySelect" onchange="showProducts()"
-                                class="form-control" style="width:90px; height:30px; font-size: small;">
-                            <option value="0">USD</option>
-                            <option value="1">UYU</option>
-                        </select>
-                    </div>
-
-                    <strong id="totalCostText">-</strong>
-                </li>
-            </ul>
-            <!-- Delivery type -->
-            <hr class="mb-4">
-            <h5 class="mb-3">Tipo de envíos</h5>
-            <div class="d-block my-3">
-                <div class="custom-control custom-radio">
-                    <input id="premiumradio" name="deliveryType" type="radio" class="custom-control-input" checked="" required="" value="15" onclick="calculateTotals()">
-                    <label class="custom-control-label" for="premiumradio">Premium de 2 a 5 días (+15%)</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input id="expressradio" name="deliveryType" type="radio" class="custom-control-input" required="" value="7" onclick="calculateTotals()">
-                    <label class="custom-control-label" for="expressradio">Express de 5 a 8 días (+7%)</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input id="standardradio" name="deliveryType" type="radio" class="custom-control-input" required="" value="5" onclick="calculateTotals()">
-                    <label class="custom-control-label" for="standardradio">Standard de 12 a 15 días (+5%)</label>
-                </div>
-                <div class="row">
-                    <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#contidionsModal">Ver condiciones</button>
                 </div>
             </div>
-            <!-- Delivery Adress -->
+
             <hr class="mb-4">
-            <h5 class="mb-3">Direccion de envio</h5>
-            <div class="d-block my-3 form-inline">
-                <select class="form-control" id="department">
-                    <option value="0">Artigas</option>
-                    <option value="1">Canelones</option>
-                    <option value="2">Cerro Largo</option>
-                    <option value="3">Colonia</option>
-                    <option value="4">Durazno</option>
-                    <option value="5">Flores</option>
-                    <option value="6">Florida</option>
-                    <option value="7">Lavalleja</option>
-                    <option value="8">Maldonado</option>
-                    <option value="9">Montevideo</option>
-                    <option value="10">Paysandú</option>
-                    <option value="11">Río Negro</option>
-                    <option value="12">Rivera</option>
-                    <option value="13">Rocha</option>
-                    <option value="14">Salto</option>
-                    <option value="15">San José</option>
-                    <option value="16">Soriano</option>
-                    <option value="17">Tacuarembó</option>
-                    <option value="18">Treinta y Tres</option>
-                </select>
-                <input type="text" placeholder="Ciudad" class="form-control" />
-                <input type="text" placeholder="Calle" class="form-control" />
-                <input type="text" placeholder="Numero" class="form-control" />
+
+            <div class="row">
+                <!-- Delivery type -->
+                <div class="col-12 col-md-3 container">
+                    <h4 class="mb-3">Tipo de envíos</h4>
+                    <div class="d-block my-3">
+                        <div class="custom-control custom-radio">
+                            <input id="premiumradio" name="deliveryType" type="radio" class="custom-control-input" checked="" required="" value="0" onclick="updateTableCosts()">
+                            <label class="custom-control-label" for="premiumradio">Premium de 2 a 5 días (+15%)</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="expressradio" name="deliveryType" type="radio" class="custom-control-input" required="" value="1" onclick="updateTableCosts()">
+                            <label class="custom-control-label" for="expressradio">Express de 5 a 8 días (+7%)</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="standardradio" name="deliveryType" type="radio" class="custom-control-input" required="" value="2" onclick="updateTableCosts()">
+                            <label class="custom-control-label" for="standardradio">Standard de 12 a 15 días (+5%)</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input id="estandardradio" name="deliveryType" type="radio" class="custom-control-input" required="" value="3" onclick="updateTableCosts()">
+                            <label class="custom-control-label" for="estandardradio">Estándar de 20 a 60 días (Free)</label>
+                        </div>
+                        <div class="row">
+                            <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#modDeliveryTypes">Ver informacion</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Delivery Adress -->
+                <div class="col-12 col-md-6 container">
+                    <h4 class="mb-3">Direccion de envio</h4>
+                    <div class="row needs-validation">
+                        <div class="col-12 col-sm-6 p-2">
+                            <select class="form-control" id="deliveryDepartment">
+                                <option value="0">Artigas</option>
+                                <option value="1">Canelones</option>
+                                <option value="2">Cerro Largo</option>
+                                <option value="3">Colonia</option>
+                                <option value="4">Durazno</option>
+                                <option value="5">Flores</option>
+                                <option value="6">Florida</option>
+                                <option value="7">Lavalleja</option>
+                                <option value="8">Maldonado</option>
+                                <option value="9">Montevideo</option>
+                                <option value="10">Paysandú</option>
+                                <option value="11">Río Negro</option>
+                                <option value="12">Rivera</option>
+                                <option value="13">Rocha</option>
+                                <option value="14">Salto</option>
+                                <option value="15">San José</option>
+                                <option value="16">Soriano</option>
+                                <option value="17">Tacuarembó</option>
+                                <option value="18">Treinta y Tres</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 col-sm-6 p-2">
+                            <input id="deliveryCity" type="text" placeholder="Ciudad" class="form-control" minlength="3" pattern="[a-zA-Z]+" required />
+                            <div class="invalid-feedback">Dato requerido.</div>
+                        </div>
+                        <div class="col-12 col-sm-6 p-2">
+                            <input id="deliveryAdress" type="text" placeholder="Calle" class="form-control" minlength="3" required />
+                            <div class="invalid-feedback">Dato requerido.</div>
+                        </div>
+                        <div class="col-12 col-sm-6 p-2">
+                            <input id="deliveryAdressNumber" type="number" placeholder="Numero" class="form-control" min="0" required />
+                            <div class="invalid-feedback">Dato requerido.</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pay method -->
+                <div class="col-12 col-md-3 container">
+                    <h4 class="mb-3">Forma de pago</h4>
+                    <p id="txtPayMethod"></p>
+                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#contidionsModal">Seleccionar</button>
+                    <div id="btnPayMethod" class="text-danger small" style="display:none;">Dato requerido.</div>
+                </div>
             </div>
 
-            <!-- Pay method -->
             <hr class="mb-4">
-            <h4 class="mb-3">Forma de pago</h4>
+
+            <div class="container">
+                <!-- Buy Complete -->
+                <button class="btn btn-primary btn-lg btn-block" onclick="finishBuy()">Finalizar Compra</button>
+            </div>
         </div>
-    </main>
+</main>
 
-    <footer class="text-muted bg-light">
+    <footer class="text-muted bg-light mt-2">
         <div class="container">
             <p class="float-right">
                 <a href="#">Volver arriba</a>
@@ -203,6 +236,143 @@
             <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
         </div>
     </footer>
+
+    <!-- Modal : Delivery Type -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="modDeliveryTypes">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tipos de envios</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <dl>
+                            <dt class="text-warning h4">Premium (+15%)</dt>
+                            <dd>
+                                <p class="muted text-justify">Tu producto será enviado utilizando los drones de reparto.(Solo lo mejor para nuestros Premium)</p>
+                            </dd>
+                            <dt class="text-primary h4">Express (7%)</dt>
+                            <dd>
+                                <p class="muted text-justify">El producto será enviado a travez de nuestro sistema de reparto nacional(el correo uruguayo).</p>
+                            </dd>
+                            <dt class="text-secondary h4">Standard (5%)</dt>
+                            <dd>
+                                <p class="muted text-justify">El producto llegará entre los dias acordados.</p>
+                            </dd>
+                            <dt class="text-secondary h4">Estándar (Free)</dt>
+                            <dd>
+                                <p class="muted text-justify">El producto llegará en algún momento.</p>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal : Payment -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="contidionsModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Forma de pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <!-- generar tabs : tarjeta de credito, transferencia bancaria -->
+                        <div class="col-xs-12 ">
+                            <!-- Tab Buttons -->
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="nav-card-tab" data-toggle="tab" href="#nav-card" role="tab"
+                                       aria-controls="nav-card" aria-selected="true">Tarjeta de Crédito</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="nav-bank-tab" data-toggle="tab" href="#nav-bank" role="tab"
+                                       aria-controls="nav-bank" aria-selected="false">Transferencia Bancaria</a>
+                                </li>
+                            </ul>
+                            <!-- Tab Content -->
+                            <div class="tab-content p-2" id="nav-tabContent" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
+                                <div class="tab-pane fade show active" id="nav-card" role="tabpanel" aria-labelledby="nav-card-tab">
+                                    <dl class="needs-validation">
+                                        <dt>
+                                            Numero de tarjeta
+                                        </dt>
+                                        <dd>
+                                            <input id="ccard-number" class="form-control" type="tel" placeholder="4XXX-XXXX-XXXX-XXXX" pattern="\b4(?:\d[ -]*?){15}\b" minlength="16" maxlength="19" required />
+                                            <p class="invalid-feedback">Rellena este espacio.</p>
+                                        </dd>
+
+                                        <dt>
+                                            Codigo de Seguridad
+                                        </dt>
+                                        <dd>
+                                            <input id="ccard-cvc" class="form-control" type="tel" placeholder="XXX" pattern="\d+" maxlength="3" required/>
+                                            <p class="invalid-feedback">Rellena este espacio.</p>
+                                        </dd>
+
+                                        <dt>
+                                            Vencimiento
+                                        </dt>
+                                        <dd>
+                                            <input id="ccard-date" class="form-control" type="month" required />
+                                            <p class="invalid-feedback">Rellena este espacio o la fecha es anterior a hoy.</p>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="tab-pane fade" id="nav-bank" role="tabpanel" aria-labelledby="nav-bank-tab">
+                                  
+                                    <dl class="needs-validation">
+                                        <dt>
+                                            Cuenta bancaria
+                                        </dt>
+                                        <dd>
+                                            <p>Nº de cuenta: 123-1234567890123-12</p>
+                                        </dd>
+                                        <dt>
+                                            Enviar Recibo a:
+                                        </dt>
+                                        <dd>
+                                            <p>E-mail: soyunmail@mail.com</p>
+                                            <p>Whatsapp: +598 99 999 999</p>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="acceptPayMethod()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Toast : Buy Completed -->
+    <div style="position:fixed; top: 64px; left:50%; margin-left:-150px;">
+        <div id="buyCompleted" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="12000">
+            <div class="toast-header">
+                <span>¡Has realizado tu compra con exito!</span>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                <p id="orderID"></p>
+                <p id="orderTotal"></p>
+            </div>
+        </div>
+    </div>
+ 
 
     <div id="spinner-wrapper">
         <div class="lds-ring">
