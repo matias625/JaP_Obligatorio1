@@ -300,7 +300,7 @@ function acceptPayMethod() {
         let elemPayMeth = document.getElementById("btnPayMethod");
         elemPayMeth.style.display = "none";
 
-        $('#contidionsModal').modal('hide')
+        $('#contidionsModal').modal('hide');
     }
 }
 

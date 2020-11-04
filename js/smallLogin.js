@@ -1,10 +1,27 @@
 document.addEventListener("DOMContentLoaded", function (e) {
-    // User Name
+    // Get User NickName
     let userName = sessionStorage.getItem("userName");
-    if (userName.length > 18) {
-        userName = userName.slice(0, 18) + "...";
+    // Get User Info
+    let userInfo = get_user(userName, sessionStorage.getItem("userPass"))
+    // Found User Info?
+    if (userInfo != undefined) {
+        // Get User Name
+        userName = userInfo.name;
+        // If User Name have more chars than 18 : split by "space".
+        if (userName.length > 18) {
+            userName = userName.split(' ')[0];
+        }
+        document.getElementById("userImg").src = userInfo.image;
+    } else {
+        // If User NickName have more chars than 18 : reduce it to 18 and add "..."
+        if (userName.length > 18) {
+            userName = userName.slice(0, 18) + "...";
+        }
     }
+
     document.getElementById("userName").innerText = userName;
+    
+
     // My Cart
     var tmpCart = JSON.parse(sessionStorage.getItem("myCart"));
     if (tmpCart == undefined) {
@@ -72,5 +89,29 @@ function disconnectUser() {
         sessionStorage.clear();
         // Go to Login Window
         window.location = "login.html";
+    }
+}
+
+function get_user(user, pass) {
+    let loadedUsers = JSON.parse(localStorage.getItem("myUsers"));
+    let selectedUser = -1;
+
+    if (loadedUsers != undefined) {
+        for (let a = 0; a < loadedUsers.length; a++) {
+            if (loadedUsers[a].user == user &&
+                loadedUsers[a].pass == pass) {
+                selectedUser = a;
+                break;
+            }
+        }
+    }
+   
+    // Find user in the list? return user data
+    if (selectedUser >= 0) {
+        return loadedUsers[selectedUser];
+    }
+    // User not found : return nothing
+    else {
+        return undefined;
     }
 }

@@ -53,21 +53,19 @@ function showProductsList() {
                 var productURL = product.name.replace(" ", "_");
 
                 htmlContentToAppend += `
-                    <a href="product-info.html?id=`+ productURL + `" class="list-group-item list-group-item-action">
-                        <div class="row">
-                            <div class="col-3">
-                                <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
-                            </div>
-                            <div class="col">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h4 class="mb-1">`+ product.name + ` - ` + product.currency + ` ` + product.cost + `</h4>
-                                    <small class="text-muted">` + product.soldCount + ` vendidos</small>
-                                </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <a href="product-info.html?id=`+ productURL + `" class="card mb-4 shadow-sm custom-card">
+                            <img class="bd-placeholder-img card-img-top" src="` + product.imgSrc + `" alt="` + product.description + `">
+                            <div class="card-body">
+                                <h4 class="mb-1">`+ product.name + `</h4>
+                                <small class="text-muted">` + product.soldCount + ` vendidos</small>
                                 <p class="mb-1">` + product.description + `</p>
                             </div>
-                        </div>
-                    </a>
-                    `;
+                            <div class="d-flex justify-content-center">
+                                <p class="btn btn-primary ">` + product.currency + ` ` + product.cost + `</p>
+                            </div>
+                        </a>
+                    </div>`;
             }
         }       
     }

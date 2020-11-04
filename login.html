@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <!-- saved from url=(0049)https://getbootstrap.com/docs/4.3/examples/album/ -->
-<html lang="en">
+<html lang="en" style="height:100%;">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,14 +14,85 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://apis.google.com/js/api:client.js"></script>
 
-    <!-- Bootstrap core CSS
+     <!--Bootstrap core CSS-->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet"> -->
+    <link href="css/styles.css" rel="stylesheet"> 
     <link href="css/loginStyle.css" rel="stylesheet" />
 
+    <style>
+        #superimg {
+            box-shadow: 0px 0px 8px 10px #343a40, inset 0px 0px 8px 10px #343a40;
+        }
+            #superimg img {
+                position: relative;
+                z-index: -2;
+            }
+
+        .containerDeep {
+            position: relative;
+            min-width: 384px;
+            width: 30%;
+            max-width: 512px;
+            margin: auto;
+            transform-style: preserve-3d;
+        }
+
+        .deep-32 {
+            position: absolute;
+            width: 80%;
+            transform-style: preserve-3d;
+            top: 0%;
+            left: 50%;
+            z-index: 4;
+            transform: translate3d(-50%, 0, 0px);
+            transition: .5s;
+            box-shadow: 0px 0px 4px 2px lightgreen, inset 0px 0px 4px 2px lightgreen;
+            border: 0px;
+        }
+            .deep-32:hover {
+                width: 100%;
+                transform: translate3d(-50%, 0, 32px);
+                box-shadow: 0px 0px 8px 4px lightgreen, inset 0px 0px 8px 4px lightgreen;
+            }
+            .deep-32:focus {
+                width: 100%;
+                transform: translate3d(-50%, 0, 32px);
+                color: gray;
+                box-shadow: 0px 0px 8px 4px lightgreen, inset 0px 0px 4px 2px lightgreen;
+            }
+            .deep-32:valid {
+                width: 90%;
+                transform: translate3d(-50%, 0, 16px);
+                box-shadow: 0px 0px 8px 4px lightgreen, inset 0px 0px 4px 4px lightgreen;
+                /*box-shadow: 0px 0px 8px 4px red, 0px 0px 8px 8px orange, 0px 0px 8px 12px yellow, 0px 0px 8px 16px darkgreen, 0px 0px 8px 20px blue, 0px 0px 8px 24px purple, 
+                    inset 0px 0px 8px 4px orange;*/ /*, inset 0px 0px 2px 4px orange, inset 0px 0px 2px 6px yellow, inset 0px 0px 2px 8px darkgreen, inset 0px 0px 2px 10px blue, inset 0px 0px 2px 12px purple;*/
+            }
+
+        .deep-btn {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            transform-style: preserve-3d;
+            top: 50%;
+            left: 50%;
+            z-index: 4;
+            transform: translate3d(-50%, -50%, 0px);
+            transition: .5s;
+        }
+            .deep-btn:focus {
+                width: 90%;
+                height: 90%;
+                transform: translate3d(-50%, -50%, 16px);
+            }
+            .deep-btn:hover {
+                width: 100%;
+                height: 100%;
+                transform: translate3d(-50%, -50%, 32px);
+            }
+    </style>
 </head>
 
-<body id="wrapper">
+<body>
     <!--
          <div class="container p-5">
          <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
@@ -32,28 +103,40 @@
          </div>
      </div>
     -->
-    <div id="login-page">
-        <div id="mainLog">
-
-            <img id="logImage" src="img/login.png" alt="E-Mercado" />
+    <div class="justify-content-center"><!--id="login-page"> mide 500-->
+        <div id="my3d" class="bg-dark p-4 needs-validation containerDeep">
+            <!--id="mainLog">-->
+            <!--<img id="logImage" src="img/login.png" alt="E-Mercado" />-->
+            <div id="superimg">
+                <img class="img-fluid" src="img/login.png" alt="E-Mercado" />
+            </div>
+          
             <br />
             <br />
-            <input id="user" type="text" placeholder="Nombre de usuario" required />
+            <div style="position:relative; height:60px; transform-style:preserve-3d;">
+                <input id="user" class="form-control deep-32" type="text" placeholder="Nombre de usuario" min-length="4" required />
+                <p class="invalid-feedback text-center" style="position:absolute; top:38px;">¡Dato vacio! O menor a 4 letras.</p>
+            </div>
+            
             <br />
-            <input id="pass" type="password" placeholder="Contraseña" required />
+            <div style="position:relative; height:60px; transform-style:preserve-3d;">
+                <input id="pass" class="form-control deep-32" type="password" placeholder="Contraseña" min-length="4" required />
+                <p class="invalid-feedback text-center" style="position:absolute; top:38px;">¡Dato vacio! O menor a 4 letras.</p>
+            </div>
+           
             <br />
-            <button id="logButton" onclick="login(user.value, pass.value)">Login</button>
-
+            <div style="position:relative; height:60px; transform-style:preserve-3d;">
+                <button id="logButton" class="btn btn-primary deep-btn">Login</button>
+            </div>
+            <br />
             <p id="orwline">OR</p>
-            <!--<button id="logButton" onclick="login(`random`, `random`)">Google Login (No funciona aún)</button>-->
+            <br />
             <div id="gSignInWrapper">
-                <div id="customBtn" class="customGPlusSignIn">
+                <div id="customBtn" class="btn btn-primary customGPlusSignIn">
                     <span class="icon"></span>
                     <span class="buttonText">Google Login</span>
                 </div>
-                <!--<div id="name">Signed</div>-->
             </div>
-
         </div>
     </div>
 
@@ -62,5 +145,14 @@
     <!-- JavaScripts -->
     <script src="js/init.js"></script>
     <script src="js/login.js"></script>
+
+    <!-- For 3D https://micku7zu.github.io/vanilla-tilt.js/ -->
+    <script type="text/javascript" src="js/vanilla-tilt.js"></script>
+    <script type="text/javascript">
+        VanillaTilt.init(document.querySelector("#my3d"), {
+            max: 20,
+            speed: 400
+        });
+    </script>
 </body>
 </html>

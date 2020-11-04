@@ -20,8 +20,11 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
+    <!-- New Css -->
+    <link href="css/specialCarousel.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-dark" onresize="changeCarousel()">
+    <!-- Nav Bar : Top -->
     <nav class="site-header sticky-top navbar navbar-expand-md navbar-dark bg-dark">
         <!-- Current Location Name -->
         <span class="navbar-brand w-25">Inicio</span>
@@ -47,7 +50,7 @@
                 <li class="nav-item dropdown w-25">
                     <!-- Button for show/hide Dropdown -->
                     <a class="nav-link dropdown-toggle " href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="img/tree1.jpg" height="26" />
+                        <img id="userImg" src="img/tree1.jpg" height="26" />
                         <span id="userName" style="padding:0 8px 0 8px;">User</span>
                     </a>
                     <!-- Dropdown Box -->
@@ -63,39 +66,113 @@
             </ul>
         </div>
     </nav>
-    <!--<nav class="site-header sticky-top py-1 bg-dark">
-        <div class="container d-flex flex-column flex-md-row justify-content-between">
-            <a class="py-2" href="index.html">Inicio</a>
-            <a class="py-2" href="categories.html">Categorías</a>
-            <a class="py-2" href="products.html">Productos</a>
-            <a class="py-2" href="sell.html">Vender</a>
-            <div class="dropdown" style="min-width:16%;">
-                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        style="display:flex; justify-content: space-between; align-items:center; width: 100%;">
-                    <img src="img/tree1.jpg" height="26" />
-                    <span id="userName" style="padding:0 8px 0 8px;">User</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="cart.html">Mi Carrito <span id="cartTotal" class="badge badge-success">0</span></a>
-                    <a class="dropdown-item" href="my-profile.html">Perfil</a>
-                    <div class="dropdown-divider"></div>
-                    <button class="dropdown-item" onclick="disconnectUser();"
-                            style="background-color: #eb4034; color: white;">
-                        Cerrar Sesión
-                    </button>
+
+    <main role="main">
+        <div class="col-12 px-0">
+            <img src="img/cover_back.png" class="" style="object-fit: cover; min-height:320px; max-width:100%; object-position:left;">
+        </div>
+
+        <div class="panel">
+            <div class="panel-heading text-light" style="">
+                <h3 class="font-weight-bold text-center">Categorias</h3>
+            </div>
+            <div class="panel-body" style="height:400px">
+                <!-- Categories Carousel 3D -->
+                <div style="position:relative;">
+                    <div class="scene_3D">
+                        <div class="carousel_3D">
+                            <div class="carousel_3D_cell">
+                                <div class="col">
+                                    <a href="category-info.html" class="card mb-4 shadow-sm custom-card">
+                                        <img class="bd-placeholder-img card-img-top" src="img/cat1.jpg">
+                                        <div class="card-body text_inFront">
+                                            <h3 class="m-1">Autos (122)</h3>
+                                            <p class="card-text">Los mejores precios en autos 0 kilómetro, de alta y media gama.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="carousel_3D_cell">
+                                <div class="col">
+                                    <a href="category-info.html" class="card mb-4 shadow-sm custom-card">
+                                        <img class="bd-placeholder-img card-img-top" src="img/cat2.jpg">
+                                        <div class="card-body">
+                                            <h3 class="m-1">Juguetes (354)</h3>
+                                            <p class="card-text">Encuentra aquí los mejores precios para niños/as de cualquier edad.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="carousel_3D_cell">
+                                <div class="col">
+                                    <a href="category-info.html" class="card mb-4 shadow-sm custom-card">
+                                        <img class="bd-placeholder-img card-img-top" src="img/cat3.jpg">
+                                        <div class="card-body">
+                                            <h3 class="m-1">Muebles (157)</h3>
+                                            <p class="card-text">Muebles antiguos, nuevos y para ser armados por uno mismo.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="carousel_3D_cell">
+                                <div class="col">
+                                    <a href="category-info.html" class="card mb-4 shadow-sm custom-card">
+                                        <img class="bd-placeholder-img card-img-top" src="img/cat4.jpg">
+                                        <div class="card-body">
+                                            <h3 class="m-1">Herramientas (452)</h3>
+                                            <p class="card-text">Herramientas para cualquier tipo de trabajo.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="carousel_3D_cell">
+                                <div class="col">
+                                    <a href="category-info.html" class="card mb-4 shadow-sm custom-card">
+                                        <img class="bd-placeholder-img card-img-top" src="img/cat5.jpg">
+                                        <div class="card-body">
+                                            <h3 class="m-1">Computadoras (724)</h3>
+                                            <p class="card-text">Todo en cuanto a computadoras, para uso de oficina y/o juegos.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="carousel_3D_cell">
+                                <div class="">
+                                    <a href="category-info.html" class="card mb-4 shadow-sm custom-card">
+                                        <img class="bd-placeholder-img card-img-top" src="img/cat6.jpg">
+                                        <div class="card-body">
+                                            <h3 class="m-1">Vestimenta (841)</h3>
+                                            <p class="card-text">Gran variedad de ropa, nueva y de segunda mano.</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="carousel_3D_cell">
+                                <div class="">
+                                    <a href="categories.html" class="card mb-4 shadow-sm custom-card">
+                                        <img class="bd-placeholder-img card-img-top" src="img/cat3.jpg">
+                                        <div class="card-body">
+                                            <h3 class="m-1">Ver todas las categorias</h3>
+                                            <p class="card-text"></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Turn Left -->
+                    <a class="carousel-control-prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <!-- Turn Right -->
+                    <a class="carousel-control-next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a>
                 </div>
             </div>
         </div>
-    </nav>-->
 
-    <main role="main">
-        <section class="jumbotron text-center">
-            <div class="m-5">
-                <h1></h1>
-            </div>
-        </section>
-
-        <div class="album py-5 bg-light">
+        <!--<div class="album py-5 bg-light">
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -157,9 +234,10 @@
                     <a type="button" class="btn btn-light btn-lg btn-block" href="categories.html">Ver todas</a>
                 </div>
             </div>
-        </div>
+        </div>-->
     </main>
-    <footer class="text-muted">
+
+    <footer class="text-muted" style="background-color:lightgray">
         <div class="container">
             <p class="float-right">
                 <a href="#">Volver arriba</a>
@@ -168,14 +246,27 @@
             <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
         </div>
     </footer>
+
     <div id="spinner-wrapper">
         <div class="lds-ring">
             <div></div><div></div><div></div><div></div>
         </div>
     </div>
+
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
+    <!-- Configure JS -->
     <script src="js/init.js"></script>
     <script src="js/smallLogin.js"></script>
+    <!-- Visual JS -->
+    <script src="js/specialCarousel.js"></script>
+    <!-- For 3D https://micku7zu.github.io/vanilla-tilt.js/ -->
+    <script type="text/javascript" src="js/vanilla-tilt.js"></script>
+    <script type="text/javascript">
+        VanillaTilt.init(document.querySelectorAll(".col"), {
+            max: 25,
+            speed: 400
+        });
+    </script>
 </body>
 </html>

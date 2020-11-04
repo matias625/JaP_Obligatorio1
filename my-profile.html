@@ -42,54 +42,146 @@
 </head>
 
 <body>
-    <nav class="site-header sticky-top py-1 bg-dark">
-        <div class="container d-flex flex-column flex-md-row justify-content-between">
-            <a class="py-2" href="index.html">Inicio</a>
-            <a class="py-2" href="categories.html">Categorías</a>
-            <a class="py-2" href="products.html">Productos</a>
-            <a class="py-2" href="sell.html">Vender</a>
-            <!--<a class="py-2 d-none d-md-inline-block" href="index.html">Inicio</a>
-            <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
-            <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
-            <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>-->
-            <div class="dropdown" style="min-width:16%;">
-                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                        style="display:flex; justify-content: space-between; align-items:center; width: 100%;">
-                    <img src="img/tree1.jpg" height="26" />
-                    <span id="userName" style="padding:0 8px 0 8px;">User</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="cart.html">Mi Carrito <span id="cartTotal" class="badge badge-success">0</span></a>
-                    <a class="dropdown-item" href="my-profile.html">Perfil</a>
-                    <div class="dropdown-divider"></div>
-                    <button class="dropdown-item" onclick="disconnectUser();"
-                            style="background-color: #eb4034; color: white;">
-                        Cerrar Sesión
-                    </button>
-                </div>
-            </div>
+    <nav class="site-header sticky-top navbar navbar-expand-md navbar-dark bg-dark">
+        <!-- Current Location Name -->
+        <span class="navbar-brand w-25">Mi Perfil</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto w-100 justify-content-between">
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <!-- Category -->
+                <li class="nav-item">
+                    <a class="nav-link" href="categories.html">Categorías</a>
+                </li>
+                <!-- Products -->
+                <li class="nav-item">
+                    <a class="nav-link" href="products.html">Productos</a>
+                </li>
+                <!-- Sell -->
+                <li class="nav-item">
+                    <a class="nav-link" href="sell.html">Vender</a>
+                </li>
+                <!-- User (dropdown) -->
+                <li class="nav-item dropdown w-25">
+                    <!-- Button for show/hide Dropdown -->
+                    <a class="nav-link dropdown-toggle " href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img id="userImg" src="img/tree1.jpg" height="26" />
+                        <span id="userName" style="padding:0 8px 0 8px;">User</span>
+                    </a>
+                    <!-- Dropdown Box -->
+                    <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item text-light" href="cart.html">Mi Carrito <span id="cartTotal" class="badge badge-success">0</span></a>
+                        <a class="dropdown-item text-light" href="my-profile.html">Perfil</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item bg-danger text-light" onclick="disconnectUser();">
+                            Cerrar Sesión
+                        </button>
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
-    <div class="container p-5">
+
+    <!-- Initial Message -->
+    <!--<div class="container p-5">
         <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
             <h4 class="alert-heading">¡A trabajar! :)</h4>
             <p>Esta sección corresponde a: Entrega 7 (Fecha de entrega: 8/11/202020) -> Punto 1 y 2.</p>
             <hr>
             <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
         </div>
-    </div>
+    </div>-->
+
+    <main style="margin-top: 16px;">
+        <div class="container">
+            <!-- Profile Info -->
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-header">
+                    <!-- Full -->
+                    <!--<a href="https://ibb.co/84pRtjS">
+        <img src="https://i.ibb.co/4gGD3j5/Deku-vs-Overhaul.png" alt="Deku-vs-Overhaul" border="0" width="128">
+    </a>-->
+                    <!-- Miniature -->
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-2 needs-validation">
+                            <span style="width:80px">Imagen</span>
+                            <input id="userImage" type="url" class="form-control" disabled placeholder="URL" />
+                            <div class="invalid-feedback">Dato requerido.</div>
+                        </div>
+                        <div class="col-6 col-md-3 p-2">
+                            <img id="userImagePreview" src="" class="card-img-top" alt="" border="0">
+                            <p class="text-center text-light">Debe ser una .png</p>
+                        </div>
+                        <div class="col-6 col-md-3 p-2">
+                            <img id="userImagePreview2" src="" class="card-img-bottom" alt="" border="0">
+                            <p class="text-center text-light">Image/PNG : base64</p>
+                        </div>
+                    </div>
+                    <div class="spec3D">
+                        <!--<a href="https://ibb.co/84pRtjS">
+            <img id="userImagePreview" src="https://i.ibb.co/84pRtjS/Deku-vs-Overhaul.png" alt="Deku-vs-Overhaul" border="0">
+        </a>-->
+                    </div>
+                </div>
+
+                <div class="card-body row needs-validation">
+                    <div class="col-12 col-md-6 p-2">
+                        <span style="width:80px">Nombres</span>
+                        <input id="userNamed" type="text" class="form-control" disabled />
+                        <div class="invalid-feedback">Dato requerido.</div>
+                    </div>
+                    <div class="col-12 col-md-6 p-2">
+                        <span style="width:80px">Apellidos</span>
+                        <input id="userLastName" type="text" class="form-control" disabled />
+                        <div class="invalid-feedback">Dato requerido.</div>
+                    </div>
+                    <div class="col-12 col-md-6 p-2">
+                        <span style="width:80px">Edad</span>
+                        <input id="userAge" type="number" class="form-control" value="0" min="0" disabled />
+                        <div class="invalid-feedback">Dato requerido. Igual o mayor a 18.</div>
+                    </div>
+                    <div class="col-12 col-md-6 p-2">
+                        <span style="width:80px">E-mail</span>
+                        <input id="userEmail" type="email" class="form-control" disabled />
+                        <div class="invalid-feedback">Dato requerido.</div>
+                    </div>
+                    <div class="col-12 col-md-6 p-2">
+                        <span style="width:80px">Teléfono de contacto</span>
+                        <input id="userTel" type="tel" class="form-control" pattern="[0-9]+" min-length="8" disabled />
+                        <div class="invalid-feedback">Dato requerido.</div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row justify-content-center">
+                        <!-- Edit -->
+                        <button id="btnEdit" class="col-4 btn btn-primary d-block" style="min-width:80px;">Editar</button>
+                        <!-- Save -->
+                        <button id="btnSave" class="col-4 btn btn-success d-none" style="min-width:80px;">Guardar</button>
+                        <!-- Cancel -->
+                        <button id="btnCancel" class="col-4 btn btn-danger d-none" style="min-width:80px;">Descartar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
     <footer class="text-muted bg-light">
         <div class="container">
             <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>
             <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
         </div>
     </footer>
-    <div class="alert fade alert-success" role="alert" id="alertResult">
-        <span id="resultSpan"></span>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
+
+    <!-- Spinner -->
     <div id="spinner-wrapper">
         <div class="lds-ring">
             <div></div>
@@ -98,12 +190,21 @@
             <div></div>
         </div>
     </div>
+    <!-- Scripts -->
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/dropzone.js"></script>
     <script src="js/init.js"></script>
-    <script src="js/my-profile.js"></script>
     <script src="js/smallLogin.js"></script>
+    <script src="js/my-profile.js"></script>
+    <!-- For 3D https://micku7zu.github.io/vanilla-tilt.js/ -->
+    <script type="text/javascript" src="js/vanilla-tilt.js"></script>
+    <script type="text/javascript">
+        VanillaTilt.init(document.querySelectorAll(".spec3D"), {
+            max: 25,
+            speed: 400
+        });
+    </script>
 </body>
 
 </html>

@@ -1,7 +1,10 @@
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
+document.addEventListener("DOMContentLoaded", function (e) {    
+    // Normal Login
+    document.getElementById("logButton").addEventListener("click", login);
+    // Google Login
     startApp();
 });
 
@@ -15,18 +18,43 @@ function Go_Home() {
     window.location.replace(newDir);
 }
 
-function login(user, pass) {
-    if (user.trim() === "") {
-        alert("Usuario vacio.");
-        return;
+function login() {
+    // Get Inputs
+    let inputUser = document.getElementById("user");
+    let inputPass = document.getElementById("pass");
+    let user = inputUser.value.trim()
+    let pass = inputPass.value.trim();
+
+    let needReturn = false;
+    if (user.length < 4) { // === "") {
+        if (inputUser.classList.contains("is-invalid") == false) {
+            inputUser.classList.add("is-invalid");
+        }
+        needReturn = true;
     }
-    if (pass.trim() === "") {
-        alert("Contraseña vacio.");
+    else {
+        if (inputUser.classList.contains("is-invalid")) {
+            inputUser.classList.remove("is-invalid");
+        }
+    }
+    if (pass.length < 4) { //  === "") {
+        if (inputPass.classList.contains("is-invalid") == false) {
+            inputPass.classList.add("is-invalid");
+        }
+        needReturn = true;
+    }
+    else {
+        if (inputPass.classList.contains("is-invalid")) {
+            inputPass.classList.remove("is-invalid");
+        }
+    }
+    if (needReturn) {
         return;
     }
 
     sessionStorage.setItem("loginStatus", "logged");
-    sessionStorage.setItem("userName", user.trim());
+    sessionStorage.setItem("userName", user);
+    sessionStorage.setItem("userPass", pass);
 
     if (sessionStorage.getItem("redirect") != null) {
         window.location = sessionStorage.getItem("redirect"); // Go_Home();

@@ -55,7 +55,7 @@
                 <li class="nav-item dropdown w-25">
                     <!-- Button for show/hide Dropdown -->
                     <a class="nav-link dropdown-toggle " href="#" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="img/tree1.jpg" height="26" />
+                        <img id="userImg" src="img/tree1.jpg" height="26" />
                         <span id="userName" style="padding:0 8px 0 8px;">User</span>
                     </a>
                     <!-- Dropdown Box -->
@@ -288,7 +288,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <!-- generar tabs : tarjeta de credito, transferencia bancaria -->
-                        <div class="col-xs-12 ">
+                        <div class="col-xs-12">
                             <!-- Tab Buttons -->
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
@@ -304,43 +304,32 @@
                             <div class="tab-content p-2" id="nav-tabContent" style="border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
                                 <div class="tab-pane fade show active" id="nav-card" role="tabpanel" aria-labelledby="nav-card-tab">
                                     <dl class="needs-validation">
-                                        <dt>
-                                            Numero de tarjeta
-                                        </dt>
+                                        <dt>Numero de tarjeta</dt>
                                         <dd>
                                             <input id="ccard-number" class="form-control" type="tel" placeholder="4XXX-XXXX-XXXX-XXXX" pattern="\b4(?:\d[ -]*?){15}\b" minlength="16" maxlength="19" required />
                                             <p class="invalid-feedback">Rellena este espacio.</p>
                                         </dd>
 
-                                        <dt>
-                                            Codigo de Seguridad
-                                        </dt>
+                                        <dt>Codigo de Seguridad</dt>
                                         <dd>
                                             <input id="ccard-cvc" class="form-control" type="tel" placeholder="XXX" pattern="\d+" maxlength="3" required/>
                                             <p class="invalid-feedback">Rellena este espacio.</p>
                                         </dd>
 
-                                        <dt>
-                                            Vencimiento
-                                        </dt>
+                                        <dt>Vencimiento</dt>
                                         <dd>
                                             <input id="ccard-date" class="form-control" type="month" required />
                                             <p class="invalid-feedback">Rellena este espacio o la fecha es anterior a hoy.</p>
                                         </dd>
                                     </dl>
                                 </div>
-                                <div class="tab-pane fade" id="nav-bank" role="tabpanel" aria-labelledby="nav-bank-tab">
-                                  
+                                <div class="tab-pane fade" id="nav-bank" role="tabpanel" aria-labelledby="nav-bank-tab">                                  
                                     <dl class="needs-validation">
-                                        <dt>
-                                            Cuenta bancaria
-                                        </dt>
+                                        <dt>Cuenta bancaria</dt>
                                         <dd>
                                             <p>Nº de cuenta: 123-1234567890123-12</p>
                                         </dd>
-                                        <dt>
-                                            Enviar Recibo a:
-                                        </dt>
+                                        <dt>Enviar Recibo a:</dt>
                                         <dd>
                                             <p>E-mail: soyunmail@mail.com</p>
                                             <p>Whatsapp: +598 99 999 999</p>
