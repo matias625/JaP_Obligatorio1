@@ -206,7 +206,7 @@ function checkDeliveryInfo() {
     }
     // Adress Number
     let elemDelAdNum = document.getElementById("deliveryAdressNumber");
-    if (elemDelAdNum.value.trim().length > 3) {
+    if (elemDelAdNum.value.trim().length > 0) {
         if (elemDelAdNum.classList.contains("is-invalid")) {
             elemDelAdNum.classList.remove("is-invalid");
         }
